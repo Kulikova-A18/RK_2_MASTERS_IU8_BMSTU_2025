@@ -56,60 +56,6 @@
 
 3.  Приложение будет доступно по адресу: `http://0.0.0.0:5000`
 
-## Аутентификация
-
-Все эндпоинты API (кроме `/api/v1/health`) требуют аутентификации через параметры запроса:
-*   `login`: Имя пользователя (например, `admin`, `manager_it`, `manager_hr`, `analyst`).
-*   `code`: Код доступа (например, `admin123`, `it2024`, `hr2024`, `analyst2024`).
-
-## Доступные эндпоинты
-
-Все эндпоинты возвращают данные в формате JSON.
-
-*   **`GET /api/v1/health`**: Проверка состояния API. Не требует аутентификации.
-    *   Пример: `curl http://0.0.0.0:5000/api/v1/health`
-
-*   **`GET /api/v1/profile?login=<login>&code=<code>`**: Получить профиль авторизованного пользователя.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/profile?login=admin&code=admin123"`
-
-*   **`GET /api/v1/departments?login=<login>&code=<code>`**: Получить статистику по отделам, к которым есть доступ.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/departments?login=manager_it&code=it2024"`
-
-*   **`GET /api/v1/tickets?login=<login>&code=<code>`**: Получить тикеты, назначенные на авторизованного сотрудника.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/tickets?login=analyst&code=analyst2024"`
-
-*   **`GET /api/v1/tickets/<int:ticket_id>?login=<login>&code=<code>`**: Получить детальную информацию по конкретному тикету.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/tickets/1?login=admin&code=admin123"`
-
-*   **`GET /api/v1/staff?login=<login>&code=<code>`**: Получить список активных сотрудников.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/staff?login=admin&code=admin123"`
-
-*   **`GET /api/v1/metrics?login=<login>&code=<code>`**: Получить персональные и отделские метрики.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/metrics?login=analyst&code=analyst2024"`
-
-*   **`GET /api/v1/timeline?login=<login>&code=<code>&days=<int>`**: Получить таймлайн по тикетам за последние N дней (по умолчанию 30).
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/timeline?login=manager_it&code=it2024&days=14"`
-
-*   **`GET /api/v1/comparison?login=<login>&code=<code>`**: Сравнение производительности пользователя с отделом.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/comparison?login=manager_hr&code=hr2024"`
-
-*   **`GET /api/v1/forecast?login=<login>&code=<code>`**: Прогноз по тикетам и трендовый анализ.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/forecast?login=admin&code=admin123"`
-
-*   **`GET /api/v1/categories?login=<login>&code=<code>`**: Статистика по категориям проблем для авторизованного сотрудника.
-    *   Пример: `curl "http://0.0.0.0:5000/api/v1/categories?login=analyst&code=analyst2024"`
-
-## Пользователи по умолчанию
-
-Для аутентификации можно использовать следующие учетные данные:
-
-| Логин         | Пароль          | Роль       | staff_id | Отделы (примеры)                               |
-| :------------ | :-------------- | :--------- | :------- | :--------------------------------------------- |
-| `admin`       | `admin123`      | `admin`    | 1        | Отдел технической поддержки, Отдел системного администрирования |
-| `manager_it`  | `it2024`        | `manager`  | 2        | Отдел технической поддержки                    |
-| `manager_hr`  | `hr2024`        | `manager`  | 3        | Отдел разработки и внедрения                   |
-| `analyst`     | `analyst2024`   | `analyst`  | 4        | Отдел технической поддержки, Отдел системного администрирования |
-
 ## Логирование
 
 Приложение логирует свои действия в файл `logs/api.log` в текущей директории. Файл лога ротируется, когда его размер превышает 10 КБ.
