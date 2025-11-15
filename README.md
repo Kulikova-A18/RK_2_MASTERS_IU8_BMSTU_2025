@@ -223,3 +223,5 @@ if __name__ == "__main__":
   ```bash
   curl -H "Content-Type: application/json" -X GET "http://localhost:5000/api/v1/profile?login=analyst_ts&code=XyZ67iOp89Ij"
   ```
+
+> На 15.11.2025 данные IP-адреса: 193.233.171.205:5000
