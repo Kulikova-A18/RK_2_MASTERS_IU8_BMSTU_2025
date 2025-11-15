@@ -15,12 +15,10 @@ def setup_logging():
     
     @return: Configured logger instance
     """
-    # --- Logging Setup ---
     # REMOVED: logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__) # Get the root logger or create a new one named __main__
-    logger.setLevel(logging.INFO) # Set level for the root logger
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
 
-    # Create logs directory if it doesn't exist
     if not os.path.exists('logs'):
         os.makedirs('logs')
 
@@ -38,7 +36,7 @@ def setup_logging():
     console_handler.setFormatter(logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     ))
-    logger.addHandler(console_handler) # Add handler to the root logger
+    logger.addHandler(console_handler) 
     
     return logger
 
@@ -51,7 +49,7 @@ def load_database_data(logger):
     """
     logger.info("Loading data from the database...")
     TEST_USERS = get_users_from_db()
-    TEST_STAFF = get_staff_from_db() # Now includes 'department'
+    TEST_STAFF = get_staff_from_db() 
     TICKET_STATUSES = get_ticket_statuses_from_db()
     PROBLEM_CATEGORIES = get_problem_categories_from_db()
     TEST_TICKETS = get_tickets_from_db()
@@ -81,7 +79,7 @@ def print_user_credentials(logger):
         logger.info(f"    Name: {user_info['name']}")
         logger.info(f"    Staff ID: {user_info['staff_id']}")
         logger.info(f"    Departments: {', '.join(user_info['departments'])}")
-        logger.info(f"    Password: {user_info['code']}")  # Show the actual code
+        logger.info(f"    Password: {user_info['code']}")
         logger.info("    ---")
 
 def main():
@@ -113,7 +111,7 @@ def main():
         logger.info(f"  Tickets: {len(TEST_TICKETS)}")
         logger.info(f"  Comments: {len(TEST_COMMENTS)}")
         logger.info(f"  Logs: {len(TEST_LOGS)}")
-        logger.info("=" * 50)
+
         logger.info(f"Server running on http://{API_HOST}:{API_PORT}")
         app.run(host=API_HOST, port=API_PORT, debug=API_DEBUG)
 
