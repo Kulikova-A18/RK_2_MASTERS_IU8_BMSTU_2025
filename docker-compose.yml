@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  rk2_app_standalone:
+    build: .
+    container_name: rk2_app_standalone_container
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - DB_HOST=localhost
+      - DB_NAME=support_system
+      - DB_USER=postgres
+      - DB_PASSWORD=new_secure_password
+      - DB_PORT=5432
+    restart: unless-stopped
